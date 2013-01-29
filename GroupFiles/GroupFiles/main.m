@@ -17,6 +17,21 @@ int main(int argc, const char * argv[])
 
     @autoreleasepool {
         
+        NSMutableDictionary *months = [[NSMutableDictionary alloc] init];
+        [months setValue:@"januari" forKey:@"01"];
+        [months setValue:@"februari" forKey:@"02"];
+        [months setValue:@"maart" forKey:@"03"];
+        [months setValue:@"april" forKey:@"04"];
+        [months setValue:@"mei" forKey:@"05"];
+        [months setValue:@"juni" forKey:@"06"];
+        [months setValue:@"juli" forKey:@"07"];
+        [months setValue:@"augustus" forKey:@"08"];
+        [months setValue:@"september" forKey:@"09"];
+        [months setValue:@"oktober" forKey:@"10"];
+        [months setValue:@"november" forKey:@"11"];
+        [months setValue:@"december" forKey:@"12"];
+        
+        
         // insert code here...
         NSString *path = @"/Users/gerb/testfotoos";
         NSURL *rootURL = [[NSURL alloc] initFileURLWithPath:path];
@@ -40,9 +55,8 @@ int main(int argc, const char * argv[])
             NSString *day = [[result dateWithCalendarFormat:@"%d" timeZone:nil] description];
             NSString *month = [[result dateWithCalendarFormat:@"%m" timeZone:nil] description];
             NSString *year = [[result dateWithCalendarFormat:@"%Y" timeZone:nil] description];
-            NSString *directoryName = [NSString stringWithFormat:@"%@ %@ %@", day, month, year];
+            NSString *directoryName = [NSString stringWithFormat:@"%@ %@ %@", day, [[months objectForKey:month] description], year];
             NSLog(@"%@", directoryName);
-            NSLog(@"%i", [month intValue]);
         }
     }
     NSLog(@"done");
