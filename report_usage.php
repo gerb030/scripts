@@ -3,7 +3,7 @@
 echo PHP_EOL;
 $file = $argv[1];
 $conn = mysql_connect ('localhost', 'gerb', 'geheim');
-mysql_select_db('configar_usage', $conn);
+mysql_select_db('configar_analysis', $conn);
 $linesRead = 0;
 $handle = @fopen($file, "r");
 if ($handle) {
@@ -33,7 +33,7 @@ function processLine($line, $conn) {
 			}
 		}
 		if (!isset($values['gameName'])) $values['gameName'] = 'NO_GAME';
-		if (!isset($values['configarId'])) $values['configarId'] = 'NO_CONFIGAR_ID';
+		if (!isset($values['configarId'])) return;
 		if (!isset($values['referrerURL'])) $values['referrerURL'] = 'NO_REFERRER';
 		if (!isset($values['BrandSystemUrl'])) $values['BrandSystemUrl'] = 'NO_BRANDSYSTEM';
 		if (!isset($values['servicePackURL'])) $values['servicePackURL'] = 'NO_SERVICEPACK';
