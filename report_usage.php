@@ -1,7 +1,13 @@
 #!/usr/local/bin/php
 <?php
+/**
+* Simple configar usage analysis script
+*/
 echo PHP_EOL;
 $file = $argv[1];
+if (!isset($argv[1])) {
+	echo 'No configar usage log filename given.'.PHP_EOL;
+}
 $conn = mysql_connect ('localhost', 'gerb', 'geheim');
 mysql_select_db('configar_analysis', $conn);
 $linesRead = 0;
@@ -33,14 +39,14 @@ function processLine($line, $conn) {
 			}
 		}
 		if (!isset($values['gameName'])) $values['gameName'] = 'NO_GAME';
-		if (!isset($values['configarId'])) return;
+		if (!isset($values['configarId'])) return; // don't log it when there's no configar id
 		if (!isset($values['referrerURL'])) $values['referrerURL'] = 'NO_REFERRER';
 		if (!isset($values['BrandSystemUrl'])) $values['BrandSystemUrl'] = 'NO_BRANDSYSTEM';
 		if (!isset($values['servicePackURL'])) $values['servicePackURL'] = 'NO_SERVICEPACK';
 		if (!isset($values['apiLocation'])) $values['apiLocation'] = 'NO_APILOCATION';
 		$game = readQuery(sprintf("SELECT id, name, configar_id, contentar_id FROM game WHERE name = '%s' AND configar_id = '%s'", $values['gameName'], $values['configarId']), $conn);
 		if (count($game) == 0) {
-			$gameId = writeQuery(sprintf("INSERT INTO game (name, configarId) VALUES ('%s', '%s');", $values['gameName'], $values['configarId']), $conn);
+			$gameId = writeQuery(sprintf("INSERT INTO game (name, configar_id) VALUES ('%s', '%s');", $values['gameName'], $values['configarId']), $conn);
 		} else {
 			$gameId = $game[0]['id'];
 		}
