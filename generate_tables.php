@@ -1,13 +1,13 @@
 <?php
 $maxSums = 30;
 $cols = 3;
-$pages = 10;
+$pages = 5;
 $mTablesConfig = array(
 	2 => array('total' => 1),
 	3 => array('total' => 9),
-	4 => array('total' => 5),
+	4 => array('total' => 3),
 	5 => array('total' => 2),
-	6 => array('total' => 8),
+	6 => array('total' => 10),
 	7 => array('total' => 12),
 	8 => array('total' => 12),
 	9 => array('total' => 12)
@@ -32,7 +32,7 @@ for($p=0;$p<$pages;$p++) {
 	$allAvailable = array();
 	foreach($mTablesConfig as $mTableNr => $mTableWeight) {
 		$thisTable = array();
-		for($t=1;$t<=10;$t++) {
+		for($t=2;$t<=9;$t++) {
 			array_push($thisTable, $t.' x '.$mTableNr.' =');
 		}
 		$allAvailable[$mTableNr] = $thisTable;
